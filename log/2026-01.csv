@@ -1,0 +1,3 @@
+date,hash,account,counterparty,allocation,amount,amount_eur,amount_usd,description
+2026-01-30,65A2AE793C54D7442429EDAA1F205390B0FB11C822C1D419B335EDAACD6AF673,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://aaswdsyo5pv2pigz3557r7pncks3duwvxpklr6sndcj4kdlcgxpfsowc2hsuk,network-incentives,-1.0,-0.000056,-0.000066,Staking Refill
+2026-01-30,F4B14311F8369C14DCF522C1EF18C480529D1D7D67958FAAD2F5DDBC2DEDD617,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://aaswdsyo5pv2pigz3557r7pncks3duwvxpklr6sndcj4kdlcgxpfsowc2hsuk,network-incentives,-50000000.0,-2804.50,-3324.50,Staking Refill

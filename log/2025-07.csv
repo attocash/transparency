@@ -1,5 +1,4 @@
-date,hash,allocation,amount,description
-2025-07-25,B368425A8A4491BD89A5D5F1A9D6806B7A5D80F012E2FC17A57B360786591A80,community-rewards,-50000000.9,Reward Bot
-2025-07-25,8E2620585B1F505DE262410E32AAEE71BED062C7EA949B7382D1F6FB47CA87C4,dev-fund,-1500000.0,OTC market management May
-2025-07-25,32C23CAC1F491D95B72BD88F8069E2C8974D99BBE9849EEA319BFA1D75985746,dev-fund,-1500000.0,OTC market management June
-2025-07-25,68E631FF2B45A0EEAA10D773B0D2E1B74A206862C91704A720805590797BFE81,dev-fund,-1500000.0,OTC market management July
+date,hash,account,counterparty,allocation,amount,amount_eur,amount_usd,description
+2025-07-25,4B5B81B3B43C182EACF7166378F88FEF433B66D31D0466134A6FCAF85033BDD2,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://abzekkyvhsos74rfeibubjifbjdzy3bi7habx5o3kt4ot2vcl5uhb2rcrn7hu,community-rewards,-1.0,,,Reward Bot Refill
+2025-07-25,23947B1F18FB8BC7E87165E2A943943E0E887EC4982FF2A094AC355F4DC1B0ED,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://abzekkyvhsos74rfeibubjifbjdzy3bi7habx5o3kt4ot2vcl5uhb2rcrn7hu,community-rewards,-100.0,,,Reward Bot Refill
+2025-07-25,D51765DCB14D2E4FB7456DE56E3F2B5034D1D5E5BBC7CA6BC4C92BE39555F7A3,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://abzekkyvhsos74rfeibubjifbjdzy3bi7habx5o3kt4ot2vcl5uhb2rcrn7hu,community-rewards,-50000000.0,,,Reward Bot Refill

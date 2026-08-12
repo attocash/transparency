@@ -1,0 +1,81 @@
+{
+  "timezone": "Europe/Amsterdam",
+  "ignore_below_atto": "1000",
+  "setup_window_seconds": 86400,
+  "setup_max_ratio": "0.001",
+  "include_setup_transactions": true,
+  "projection_url": "https://gatekeeper.live.application.atto.cash/projections/addresses",
+  "projection_source_labels": ["Genesis"],
+  "projection_source_prefixes": ["Treasury "],
+  "valuation": {
+    "gatekeeper_metrics_url": "https://gatekeeper.live.application.atto.cash/metrics",
+    "history_lookback_days": 365
+  },
+  "tokenomics": {
+    "total_supply_atto": "18000000000",
+    "whitepaper_url": "https://atto.cash/docs/whitepaper#distribution",
+    "allocations": [
+      {
+        "name": "Network Incentives",
+        "share_percent": "35",
+        "ledger_allocations": ["network-incentives"]
+      },
+      {
+        "name": "Development Fund",
+        "share_percent": "40",
+        "ledger_allocations": ["dev-fund"]
+      },
+      {
+        "name": "Community Rewards",
+        "share_percent": "24",
+        "ledger_allocations": ["community-rewards"]
+      },
+      {
+        "name": "Founder Allocation",
+        "share_percent": "1",
+        "ledger_allocations": ["founder"]
+      }
+    ]
+  },
+  "address_labels": {
+    "atto://aau4pgxw5nhfc2vfqbgfowl27s5i7gxxips4f3kyaisx4cqzyxpize2by63fq": "XT Deposit Address",
+    "atto://aawnd4tl27avz6yq4sqb7negkl2vs24butsazsea3fqkk4d6qnfh2wehqrt7w": "XT Deposit Address",
+    "atto://abxwzfio4c46m3g767ivxrdfmagfy7iv3wtsqrx5oamsyrmt7sk3pfgym24rq": "XT Deposit Address",
+    "atto://abxdzkawh4ixj4lnzjn33fi4f35rzgz6respfg7xkh7klkfobcfchrp6usyx2": "LCX Deposit Address",
+    "atto://abi4oywbudgeagl3r4mmofv2gkwtlreccxerz42akxo5fonz4n5kylv7ru7sg": "Rotilho",
+    "atto://addqgnygjpojy5yz5usfvr7hwpmqsecfj2j6lpukq4oh6oyn6rng4lmtkh3xk": "LCX Deposit Address",
+    "atto://adlf5ir7vkjsu2e5qyqvo47mlenyxgfszpqeuvff6qubax7m3i3fcuec5jwhy": "XT Deposit Address"
+  },
+  "rules": [
+    {
+      "direction": "send",
+      "counterparty_public_key": "51C762C1A0CC40197B8F18C716BA32AD35C48215C91CF34055DDD2B9B9E37AAC",
+      "allocation": "dev-fund",
+      "description": "felipe promo"
+    },
+    {
+      "direction": "send",
+      "counterparty_public_key": "2561CB0EEBEBA7A0D9DF7BF8FDED12A5B1D2D5BBD4B8FA4D1893C50D6235DE59",
+      "allocation": "network-incentives",
+      "description": "Staking Refill"
+    },
+    {
+      "direction": "send",
+      "counterparty_public_key": "72452B153C9D2FF225220340A5050A479C6C28F9C01BF5DB54F8E9EAA25F6870",
+      "allocation": "community-rewards",
+      "description": "Reward Bot Refill"
+    },
+    {
+      "direction": "send",
+      "counterparty_public_key": "ECC0E14F84B6C3060E32339B33C08B94A132974519F884FBE6C71B0F50EB99EA",
+      "allocation": "network-incentives",
+      "description": "Faucet Refill"
+    },
+    {
+      "direction": "receive",
+      "counterparty_public_key": "FEF98C3F9BD55C51C80F449B24BD2A59ECF10E1C2B115F882247D010FE7662E8",
+      "allocation": "dev-fund",
+      "description": "liquidity"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
-date,hash,allocation,amount,description
-2024-11-23,E19C5F10B657C7FA993E566E59026D7A080ECDD66357DAFA1CBF8C59E982B2E5,faucet,-15000000.0,faucet
-2024-11-23,0C88C05FEE9638D3ED196ABA1425A35C630CF2B7847B2AF924ABCB300D94F7AF,community-rewards,-15000000.0,reward
+date,hash,account,counterparty,allocation,amount,amount_eur,amount_usd,description
+2024-11-23,D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08,atto://adcvvasbd2duys5y4ekgrd3gw2og3vvhrnvrvwoki2yko6xmc3ere2apkx7wo,atto://adcvvasbd2duys5y4ekgrd3gw2og3vvhrnvrvwoki2yko6xmc3ere2apkx7wo,opening-balance,+18000000000.0,,,Genesis opening balance
+2024-11-23,E19C5F10B657C7FA993E566E59026D7A080ECDD66357DAFA1CBF8C59E982B2E5,atto://adcvvasbd2duys5y4ekgrd3gw2og3vvhrnvrvwoki2yko6xmc3ere2apkx7wo,atto://adwmbykpqs3mgbqogizzwm6arokkcmuxium7rbh343drwd2q5om6vj3jrfiyk,network-incentives,-15000000.0,,,Faucet Refill
+2024-11-23,0C88C05FEE9638D3ED196ABA1425A35C630CF2B7847B2AF924ABCB300D94F7AF,atto://adcvvasbd2duys5y4ekgrd3gw2og3vvhrnvrvwoki2yko6xmc3ere2apkx7wo,atto://abzekkyvhsos74rfeibubjifbjdzy3bi7habx5o3kt4ot2vcl5uhb2rcrn7hu,community-rewards,-15000000.0,,,Reward Bot Refill

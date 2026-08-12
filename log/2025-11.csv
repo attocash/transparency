@@ -1,5 +1,6 @@
-date,hash,allocation,amount,description
-2025-11-05,4204795B74B684627263C3BCD9B4E5CB91AD7681E2690495870EEC075852E11F,dev-fund,+69799999.0,liquidity
-2025-11-05,3CE11B48D2E9C0B5CB2C82973E4E6D7CD676C4FF189E34CD6024D145BE820CA2,dev-fund,+199999.0,liquidity
-2025-11-05,B5E018971934105B172307793C1BBEEA34E374D58B3F0CFC473766EE2EBCF992,dev-fund,+249999999.0,liquidity
-2025-11-05,0F46F35F1ED886137A730658B0FFDAF50F9EBE61A4C905663D028E46C0993535,dev-fund,-36360000.0,creative direction & strategy
+date,hash,account,counterparty,allocation,amount,amount_eur,amount_usd,description
+2025-11-05,4204795B74B684627263C3BCD9B4E5CB91AD7681E2690495870EEC075852E11F,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://ad7ptdb7tpkvyuoib5cjwjf5fjm6z4iodqvrcx4iejd5aeh6ozroq3vge3ada,dev-fund,+69799999.0,+4923.691929,+5654.497919,liquidity
+2025-11-05,3CE11B48D2E9C0B5CB2C82973E4E6D7CD676C4FF189E34CD6024D145BE820CA2,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://ad7ptdb7tpkvyuoib5cjwjf5fjm6z4iodqvrcx4iejd5aeh6ozroq3vge3ada,dev-fund,+199999.0,+14.107929,+16.201919,liquidity
+2025-11-05,B5E018971934105B172307793C1BBEEA34E374D58B3F0CFC473766EE2EBCF992,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://ad7ptdb7tpkvyuoib5cjwjf5fjm6z4iodqvrcx4iejd5aeh6ozroq3vge3ada,dev-fund,+249999999.0,+17634.999929,+20252.499919,liquidity
+2025-11-05,880239341D5F95585B7BFB4A644DF311527EB23FEE4A36D279BC34E604D8C2D8,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://abqisstcmycpkabx2verc73zieg2ves3ndxpdyz4xmadihrorcdnpzr2cn6ng,dev-fund,-1.0,-0.000071,-0.000081,creative direction & strategy
+2025-11-05,0F46F35F1ED886137A730658B0FFDAF50F9EBE61A4C905663D028E46C0993535,atto://adqaxis7pdonb4rjvezvaybfntxreye5cyo26l6wctodfq34zxcwu3rtvdhn2,atto://abqisstcmycpkabx2verc73zieg2ves3ndxpdyz4xmadihrorcdnpzr2cn6ng,dev-fund,-36360000.0,-2564.8344,-2945.5236,creative direction & strategy
