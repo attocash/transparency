@@ -1,7 +1,9 @@
 import importlib.util
+import io
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stderr, redirect_stdout
 from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
@@ -98,6 +100,45 @@ class ReconcileTest(unittest.TestCase):
         # Then
         self.assertEqual((), plan.rows)
         self.assertEqual((send,), plan.unknown_entries)
+
+    def test_cli_reports_unclassified_send_before_valuing_an_incomplete_book(self):
+        genesis, recipient = "A" * 64, "B" * 64
+        unit = reconcile.RAW_PER_ATTO
+        config = reconcile.Config(
+            "UTC", (reconcile.SourceAccount("Genesis", genesis),), (), 0, 0,
+            reconcile.Fraction(0), include_setup_transactions=True,
+            total_supply_raw=100 * unit,
+            token_allocations=(reconcile.TokenAllocation("Fund", reconcile.Fraction(100), ("fund",)),),
+        )
+        opening = entry("1" * 64, genesis, 1, "OPEN", genesis, 0, 100 * unit, 1_000)
+        send = entry("2" * 64, genesis, 2, "SEND", recipient, 100 * unit, 75 * unit, 2_000)
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            patch.object(reconcile, "load_config", return_value=config),
+            patch.object(reconcile, "fetch_source_entries", return_value=[opening, send]),
+            patch.object(reconcile, "reconcile_exchange_rates") as rates,
+        ):
+            root = Path(directory)
+            paths = [
+                "--log-dir", str(root / "log"),
+                "--readme", str(root / "README.md"),
+                "--addresses-file", str(root / "addresses.csv"),
+                "--exchange-rates-file", str(root / "rates.csv"),
+            ]
+            for flags in ([], ["--apply"]):
+                with (
+                    self.subTest(flags=flags),
+                    redirect_stdout(io.StringIO()),
+                    redirect_stderr(io.StringIO()) as messages,
+                ):
+                    self.assertEqual(2, reconcile.main([*paths, *flags]))
+                    self.assertIn(
+                        f"{send.hash}: -25.0 ATTO, send counterparty {recipient}",
+                        messages.getvalue(),
+                    )
+                    self.assertIn("add classification rules", messages.getvalue())
+            rates.assert_not_called()
+            self.assertEqual([], list(root.iterdir()))
 
     def test_includes_setup_send_in_accounting_book(self):
         # Given
