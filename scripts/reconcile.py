@@ -1653,6 +1653,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         source_rows, logged_entries, config.timezone_name, account_directory
     )
     plan = build_plan(config, rows, source_entries, account_directory)
+    for warning in warnings:
+        print(f"WARNING: {warning}", file=sys.stderr)
+    if plan.unknown_entries:
+        print_plan(plan, args.log_dir)
+        print("No files changed; add classification rules and rerun.", file=sys.stderr)
+        return 2
+
     normalized_rows = normalize_logged_rows(
         source_rows,
         logged_entries,
@@ -1671,12 +1678,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     )
 
-    for warning in warnings:
-        print(f"WARNING: {warning}", file=sys.stderr)
     print_plan(plan, args.log_dir)
-    if plan.unknown_entries:
-        print("No files changed; add classification rules and rerun.", file=sys.stderr)
-        return 2
     if args.apply:
         written = write_accounting_book(
             args.log_dir, normalized_rows, plan.rows, exchange_rates

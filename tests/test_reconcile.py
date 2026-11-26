@@ -1,7 +1,9 @@
 import importlib.util
+import io
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stderr, redirect_stdout
 from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
@@ -98,6 +100,65 @@ class ReconcileTest(unittest.TestCase):
         # Then
         self.assertEqual((), plan.rows)
         self.assertEqual((send,), plan.unknown_entries)
+
+    def test_cli_reports_unclassified_transfers_before_valuing_the_book(self):
+        genesis, recipient, sender = "A" * 64, "B" * 64, "C" * 64
+        unit = reconcile.RAW_PER_ATTO
+        config = reconcile.Config(
+            "UTC", (reconcile.SourceAccount("Genesis", genesis),), (), 0, 0,
+            reconcile.Fraction(0), include_setup_transactions=True,
+            total_supply_raw=100 * unit,
+            token_allocations=(reconcile.TokenAllocation("Fund", reconcile.Fraction(100), ("fund",)),),
+        )
+        opening = entry("1" * 64, genesis, 1, "OPEN", genesis, 0, 100 * unit, 1_000)
+        send = entry("2" * 64, genesis, 2, "SEND", recipient, 100 * unit, 75 * unit, 2_000)
+        receive = entry("3" * 64, genesis, 3, "RECEIVE", sender, 75 * unit, 100 * unit, 3_000)
+        rate = reconcile.ExchangeRate("1970-01-01", Decimal(1), Decimal(1))
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            patch.object(reconcile, "load_config", return_value=config),
+            patch.object(reconcile.NodeClient, "get_entry", return_value=opening),
+            patch.object(reconcile, "fetch_source_entries") as source_entries,
+            patch.object(
+                reconcile.urllib.request, "urlopen", side_effect=OSError("price service unavailable")
+            ) as request,
+        ):
+            root = Path(directory)
+            (root / "log").mkdir()
+            opening_plan = reconcile.build_plan(config, [], [opening])
+            reconcile.write_accounting_book(root / "log", (), opening_plan.rows, [rate])
+            reconcile.write_exchange_rates(root / "rates.csv", [rate])
+            (root / "README.md").write_text("# Treasury\n", encoding="utf-8")
+            (root / "addresses.csv").write_text("address,label\n", encoding="utf-8")
+            def contents():
+                return {path: path.read_bytes() for path in root.rglob("*") if path.is_file()}
+
+            before = contents()
+            paths = [
+                "--log-dir", str(root / "log"),
+                "--readme", str(root / "README.md"),
+                "--addresses-file", str(root / "addresses.csv"),
+                "--exchange-rates-file", str(root / "rates.csv"),
+            ]
+            for missing in ((send,), (send, receive)):
+                source_entries.return_value = [opening, *missing]
+                for flags in ([], ["--apply"]):
+                    with (
+                        self.subTest(missing=len(missing), flags=flags),
+                        redirect_stdout(io.StringIO()),
+                        redirect_stderr(io.StringIO()) as messages,
+                    ):
+                        self.assertEqual(2, reconcile.main([*paths, *flags]))
+                        self.assertIn(
+                            f"{send.hash}: -25.0 ATTO, send counterparty {recipient}", messages.getvalue()
+                        )
+                        if receive in missing:
+                            self.assertIn(
+                                f"{receive.hash}: +25.0 ATTO, receive counterparty {sender}", messages.getvalue()
+                            )
+                        self.assertIn("add classification rules", messages.getvalue())
+                        self.assertEqual(before, contents())
+            request.assert_not_called()
 
     def test_includes_setup_send_in_accounting_book(self):
         # Given
